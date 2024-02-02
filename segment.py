@@ -1,6 +1,6 @@
 import numpy as np
 from sam.segment_anything import sam_model_registry, SamAutomaticMaskGenerator
-
+from huggingface_hub import hf_hub_download
 
 def segmentation(img0):
 
@@ -8,8 +8,8 @@ def segmentation(img0):
     max_y=image.shape[0]
     max_x=image.shape[1]
 
-
-    sam_checkpoint = "sam_vit_b_01ec64.pth"
+    chkpt_path = hf_hub_download("ybelkada/segment-anything", "checkpoints/sam_vit_b_01ec64.pth")
+    sam_checkpoint = chkpt_path 
     model_type = "vit_b"
 
     device = "cuda"
