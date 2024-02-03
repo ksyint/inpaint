@@ -32,7 +32,7 @@ def segmentation(img0):
             out=Image.fromarray(masks[i]['segmentation'])
     
 
-    return img0,out
+    return image,out
     
     
     
