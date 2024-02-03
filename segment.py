@@ -1,10 +1,14 @@
 import numpy as np
 from sam.segment_anything import sam_model_registry, SamAutomaticMaskGenerator
 from huggingface_hub import hf_hub_download
+from pad import padding
+from PIL import Image
 
 def segmentation(img0):
 
     image = np.array(img0)
+    image=padding(image)
+    
     max_y=image.shape[0]
     max_x=image.shape[1]
 
@@ -21,7 +25,7 @@ def segmentation(img0):
 
     masks = mask_generator.generate(image)
 
-    from PIL import Image 
+    
     for i in range(len(masks)):
         
         if 4>masks[i]["bbox"][0]>-1 and 4>masks[i]["bbox"][1]>-1 and  max_x+3>masks[i]["bbox"][2]>max_x-2  and max_y+3>masks[i]["bbox"][3]>max_y-2:
